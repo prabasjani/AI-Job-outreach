@@ -5,7 +5,7 @@ export default (req, res, next) => {
     const authHeader = req.headers.authorization;
 
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
-      return res.status(401).json({ msg: "No token" });
+      return res.status(401).json({ msg: "Unauthorized Entry!" });
     }
 
     const token = authHeader.split(" ")[1];
