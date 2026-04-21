@@ -32,6 +32,7 @@ export const completeOnboarding = async (req, res) => {
         resumeUrl: resumePath,
         skills: skills ? skills.split(",") : [],
         onboardingCompleted: true,
+        analysis: analysis,
       },
       { new: true },
     );

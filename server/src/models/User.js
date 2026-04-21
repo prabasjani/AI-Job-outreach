@@ -26,6 +26,13 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+
+    analysis: {
+      score: { type: Number, default: 0 },
+      strengths: { type: [String], default: [] },
+      missingSkills: { type: [String], default: [] },
+      suggestions: { type: [String], default: [] },
+    },
   },
   { timestamps: true },
 );
