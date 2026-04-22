@@ -46,3 +46,47 @@ export const completeOnboarding = async (req, res) => {
     res.status(500).json({ msg: "Onboarding failed" });
   }
 };
+
+// GET PROFILE
+export const getProfile = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select(
+      "-password -refreshToken",
+    );
+
+    res.json({ user });
+  } catch (err) {
+    res.status(500).json({ msg: "Failed to fetch profile" });
+  }
+};
+
+// UPDATE PROFILE
+export const updateProfile = async (req, res) => {
+  try {
+    const updates = req.body;
+
+    // Prevent updating sensitive fields directly
+    delete updates.password;
+    delete updates.refreshToken;
+
+    const user = await User.findByIdAndUpdate(req.user.id, updates, {
+      new: true,
+      runValidators: true,
+    });
+
+    res.json(sanitizeUser(user));
+  } catch (err) {
+    res.status(500).json({ msg: "Failed to update profile" });
+  }
+};
+
+// DELETE PROFILE
+export const deleteProfile = async (req, res) => {
+  try {
+    await User.findByIdAndDelete(req.user.id);
+
+    res.json({ msg: "User deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ msg: "Failed to delete user" });
+  }
+};
