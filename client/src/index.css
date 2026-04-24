@@ -1,0 +1,41 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+@import "tailwindcss";
+
+@theme {
+  --font-mont: "Montserrat", sans-serif;
+  --font-int: "Inter", sans-serif;
+  --font-ubuntu: "Ubuntu Mono", monospace;
+  --color-main: oklch(95.4% 0.038 75.164); /*bg-orange-100*/
+  --color-primary: oklch(70.5% 0.213 47.604); /*bg-orange-500*/
+  --color-accent: oklch(83.7% 0.128 66.29) /*bg-orange-300*/;
+  --color-hover: oklch(75% 0.183 55.934) /*bg-orange-400*/;
+  --color-success: oklch(62.7% 0.194 149.214) /*bg-green-600*/;
+  --color-danger: oklch(57.7% 0.245 27.325) /*bg-red-600*/;
+}
+
+h2 {
+  @apply text-hover text-base font-mont font-semibold mb-4;
+}
+
+h3 {
+  @apply text-hover text-base font-mont font-semibold mb-4;
+}
+
+p {
+  @apply text-[12px] text-gray-600;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  @apply bg-main/80;
+}
+
+.active {
+  @apply flex items-center justify-center py-2 rounded-xl bg-accent text-gray-800 transform transition-all;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+::-webkit-scrollbar {
+  display: none;
+}

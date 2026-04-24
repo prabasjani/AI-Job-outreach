@@ -47,8 +47,8 @@ export const login = async (req, res) => {
     // send refresh token as httpOnly cookie (secure)
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      secure: true, // process.env.NODE_ENV === "production"
-      sameSite: "Strict",
+      secure: false, // process.env.NODE_ENV === "production"
+      sameSite: "lax",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
@@ -59,6 +59,7 @@ export const login = async (req, res) => {
         email: user.email,
         onboardingCompleted: user.onboardingCompleted,
       },
+      msg: "Logged In",
     });
   } catch {
     res.status(500).json({ msg: "Server error" });

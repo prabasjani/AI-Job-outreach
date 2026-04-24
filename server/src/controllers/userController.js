@@ -34,7 +34,7 @@ export const completeOnboarding = async (req, res) => {
         onboardingCompleted: true,
         analysis: analysis,
       },
-      { new: true },
+      { returnDocument: "after" },
     );
 
     res.json({
@@ -70,11 +70,11 @@ export const updateProfile = async (req, res) => {
     delete updates.refreshToken;
 
     const user = await User.findByIdAndUpdate(req.user.id, updates, {
-      new: true,
+      returnDocument: "after",
       runValidators: true,
     });
 
-    res.json(sanitizeUser(user));
+    res.json({ user: sanitizeUser(user), msg: "Profile Updated" });
   } catch (err) {
     res.status(500).json({ msg: "Failed to update profile" });
   }

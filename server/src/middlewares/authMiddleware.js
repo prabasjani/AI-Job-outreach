@@ -2,13 +2,13 @@ import jwt from "jsonwebtoken";
 
 export default (req, res, next) => {
   try {
-    const authHeader = req.headers.authorization;
-
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    let token;
+    if (req.cookies?.refreshToken) {
+      token = req.cookies.refreshToken;
+    }
+    if (!token) {
       return res.status(401).json({ msg: "Unauthorized Entry!" });
     }
-
-    const token = authHeader.split(" ")[1];
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
